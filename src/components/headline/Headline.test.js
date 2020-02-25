@@ -2,7 +2,9 @@ import React from 'react'
 import Enzyme, { shallow } from 'enzyme'
 import Headline from './Headline'
 import Adapter from 'enzyme-adapter-react-16'
-import { findByTestAtrr } from '../../../Utils/index'
+import { findByTestAtrr, checkProps } from '../../../Utils/index'
+
+
 
 
 Enzyme.configure({adapter: new Adapter() })
@@ -14,6 +16,25 @@ const setUp = (props={}) => {
 
 describe('Headline Component', () => {
 
+   describe('Check Props Types ', () => {
+      it('Should not throw an error ', () => {
+         const expectedProps = {
+            header: 'Test Header', 
+            desc: 'Test desc', 
+            termArray: [
+               {
+                  first: 'Test first',
+                  last: 'Test last', 
+                  age: false, 
+                  email: 'some@gmail.com',
+                  onlineStatus: false
+               }
+            ]
+         }; 
+         const propsErr = checkProps(Headline, expectedProps)
+         expect(propsErr).toBeUndefined(); 
+      })
+   })
    describe('Have props', () => {
       let component; 
       beforeEach(() => {
